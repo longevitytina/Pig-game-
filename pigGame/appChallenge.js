@@ -30,13 +30,11 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
 
         //1. Random number 
         var dice = Math.floor(Math.random()*6) +1;
+        console.log(dice);
 
         //2. Disply result
         var diceDOM = document.querySelector('.dice');
-        var diceTwo = document.querySelector('.dice');
-        
         diceDOM.style.display = 'block';
-      
         diceDOM.src = 'dice-' + dice + '.png';
 
 
@@ -54,16 +52,20 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
             //add score
             nextPlayer();
 
-        }else {
+        } else {
             //next player 
             roundScore += dice;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
-            console.log(dice);
         }
         previousDice = dice;
     }
-
 });
+
+// if this
+//   then do this thing
+// else
+//   loop over this array
+//     for each value in the array, do xyz
 
 document.querySelector('.btn-hold').addEventListener('click', function(){
     if (gamePlaying){
@@ -72,20 +74,19 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 
     //update the UI 
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+    // var input = document.querySelector('.final-score').value; 
     
-    var input = document.querySelector('.final-score').value; 
-    
-    //undefined, 0, null, are COERCED to false
-    //anything else is COERECED to true
-    if(input) {
-        var winningScore = input;
-    } else {
-        winningScore = 100;
-    }
+    // //undefined, 0, null, are COERCED to false
+    // //anything else is COERECED to true
+    // if(input) {
+    //     var winningScore = input;
+    // } else {
+    //     winningScore = 100;
+    // }
 
 
     // check if player won the game, first to reach 100 points 
-    if (scores[activePlayer] >= winningScore){
+    if (scores[activePlayer] >= 100){
         document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
         document.querySelector('.dice').style.display = 'none';
         document.querySelector('.player-' + activePlayer + '-panel' ).classList.add('winner');
@@ -100,7 +101,8 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
 function nextPlayer(){
     //next player 
     activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-    roundScore = 0
+    roundScore = 0;
+    previousDice = 0;
     //same as -> //if (activePlayer === 0){
         //active player = 1;
     //} else {
@@ -108,12 +110,12 @@ function nextPlayer(){
 
         document.getElementById('current-0').textContent = '0';
         document.getElementById('current-1').textContent = '0';
-
+        debugger
         document.querySelector('.player-1-panel').classList.toggle('active');
         document.querySelector('.player-0-panel').classList.toggle('active');
 
-        //document.querySelector('.player-0-panel').classList.remove('active');
-        //document.querySelector('.player-1-panel').classList.add('active');
+        document.querySelector('.player-0-panel').classList.remove('active');
+        document.querySelector('.player-1-panel').classList.add('active');
 
         document.querySelector('.dice').style.display = 'diceDOM';
 }
