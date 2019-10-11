@@ -40,7 +40,17 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
 
 
         //3. Update the round score IF the rolled number was NOT a 1
-        if (dice1 != 1 && dice2 != 1){
+        if( dice1 === 6 && dice2 === 6){
+            //     //lose all global points, end game
+                scores[activePlayer] = 0
+                roundScore = 0
+                document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+                document.querySelector('#current-' + activePlayer).textContent = roundScore;
+                document.querySelector('#name-' + activePlayer).textContent = 'Loser';
+                gamePlaying = false;
+        
+        
+        } else if (dice1 != 1 && dice2 != 1){
             roundScore += dice1 + dice2;
             document.querySelector('#current-' + activePlayer).textContent =roundScore;
         } else {
